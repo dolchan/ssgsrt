@@ -1,10 +1,10 @@
 Package: ssgsrt
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Single sample gene set rank test
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Seungchan Kim
+Maintainer: Seungchan Kim <dolchan@gmail.com>
+Description: Perform single sample gene set rank test
+License: NA
 LazyData: TRUE
 RoxygenNote: 5.0.1
