@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Extract a specific component from gene set analysis (\\code{gsa_list}) and\n#' create a matrix.\n#'\n#' @param gsa_list a list of gene set analysis from \\code{gene_set_rank_test}.\n#' @param which a name of a list element to extract. Defaults to 'z.stat'.\n#' @return a matrix (M gene sets x N samples) of selected element.\n#' @export\n\nget_a_value <- function(gsa_list, which = 'z.stat') {\n  n_row <- length(gsa_list[[1]])\n  n_col <- length(gsa_list)\n\n  gsa_z_stat <- matrix(nrow = n_row, ncol = n_col)\n\n  for (ii in 1:n_col) {\n    gsa_z_stat[, ii] <- sapply(gsa_list[[ii]], '[', which)\n  }\n\n  colnames(gsa_z_stat) <- names(gsa_list)\n  rownames(gsa_z_stat) <- names(gsa_list[[1]])\n\n  gsa_z_stat\n}\n\n#' Extract \\code{'z.stat'} element\n#' @export\n\nget_z_stat <- function(gsa_list) {\n  get_a_value(gsa_list, 'z.stat')\n}\n\n#' Extract \\code{'p.value'} element\n#' @export\n\nget_p_value <- function(gsa_list) {\n  get_a_value(gsa_list, 'p.value')\n}\n\n#' Extract \\code{'D'} element\n#' @export\n\nget_D_stat <- function(gsa_list) {\n  get_a_value(gsa_list, 'D')\n}\n",
+    "created" : 1461000647332.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4025047417",
+    "id" : "DAC854B7",
+    "lastKnownWriteTime" : 1461006669,
+    "last_content_update" : 1461006669624,
+    "path" : "~/Research/ssgsrt/R/ssgsrt.get_a_value.R",
+    "project_path" : "R/ssgsrt.get_a_value.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

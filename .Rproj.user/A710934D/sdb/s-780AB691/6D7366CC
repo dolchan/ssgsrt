@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Read a file in MSigDB/gmt format into a list\n#'\n#' This function reads a GMT file and creates a list of gene sets.\n#'\n#' @param gmtfile a text file in 'gmt' format.\n#'        See 'parse_a_line_in_gmt' function for detail.\n#' @param min.size The minimum gene set size to read.  Defaults to 0.\n#' @param max.size The maximum gene set size to read.  Defaults to no limit.\n#' @param simplify Defaults to TRUE.  See 'output' for detail.\n#' @return a list of gene set.\n#'        If TRUE, the return structure is simplified to a list of genesets\n#'        each of which is a list of genes and the name of each geneset is\n#'        the name of gene set from MSigDB file, the first element of each line.\n#'        If FALSE, it returns a list of three element list each element of which\n#'        is \\code{name}, \\code{url}, and \\code{geneset}.\n#' @export\n#' @examples\n#' read_MSigDB('c2.cp.biocarta.v4.0.symbols.gmt.txt')\n\nread_MSigDB <- function(gmtfile, min.size = 0, max.size = -1, simplify = TRUE) {\n  gstemp <- read.table(gmtfile, sep=\"\\n\")\n  genesets <- apply(gstemp, 1, parse_a_line_in_gmt)\n\n  list.name = array(\"\", length(genesets))\n\n  # convert to named list -- this will make the access to the list much easier.\n  for (ii in 1:length(genesets)) {\n    list.name[ii] = genesets[[ii]]$name\n  }\n  names(genesets) = list.name\n\n  # Prune out ones that are too long/short\n  for (ii in length(genesets):1) {\n    if (length(genesets[[ii]]$geneset) < min.size ||\n        (max.size > 0 && length(genesets[[ii]]$geneset) > max.size))\n      genesets[[ii]] <- NULL\n  }\n\n  if (simplify) {\n    genesets <- sapply(genesets, \"[\", \"geneset\")\n    names(genesets) <- sub(\".geneset$\", \"\", names(genesets))\n  }\n\n  return(genesets)\n}\n",
+    "created" : 1461001889620.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3787551380",
+    "id" : "6D7366CC",
+    "lastKnownWriteTime" : 1461002719,
+    "last_content_update" : 1461002719897,
+    "path" : "~/Research/ssgsrt/R/ssgsrt.read_MSigDB.R",
+    "project_path" : "R/ssgsrt.read_MSigDB.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

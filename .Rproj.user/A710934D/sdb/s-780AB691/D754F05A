@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Perform a rank-based single sample gene set analysis.\n#'\n#' This function performs a rank-based single sample gene set analysis for\n#' a set of samples (\\code{data}) and a list of gene sets (\\code{geneset_list}).\n#'\n#' @param data Either a set of samples in \\code{data.frame} format\n#'             or a sample in a named array format.\n#' @param geneset_list a named list of gene sets, each of list element is named\n#'                     and a list ofgenes.\n#' @param alternative see 'a_sample_gene_set_rank_test' for detail.\n#' @param test.method \\code{c('ks.test', 'wilcox.test')}.  Defaults to 'ks'.\n#' @export\n#' @examples\n#' gene_set_rank_test(data, a_geneset_list)\n\ngene_set_rank_test <- function(data, geneset_list, alternative = \"two.sided\", test.method = \"ks\") {\n  if (is.data.frame(data)) {\n    n_samples <- ncol(data)\n    gsas_list <- vector(\"list\", length(n_samples))\n    for (ii in 1:n_samples) {\n      x <- data[, ii]\n      names(x) <- rownames(data)\n      a_gsa <- a_sample_gene_set_rank_test(x, geneset_list,\n                                           alternative = alternative,\n                                           test.method = test.method)\n      gsas_list[[ii]] <- a_gsa\n      print(sprintf(\"%s (%d / %d) processed\", colnames(data)[ii], ii, n_samples))\n    }\n    names(gsas_list) <- colnames(data)\n    gsas_list\n  } else {\n    a_sample_gene_set_rank_test(data, geneset_list,\n                                alternative = alternative,\n                                test.method = test.method)\n  }\n}\n\n",
+    "created" : 1461003392116.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "37368704",
+    "id" : "D754F05A",
+    "lastKnownWriteTime" : 1461004885,
+    "last_content_update" : 1461004885770,
+    "path" : "~/Research/ssgsrt/R/ssgsrt.gene_set_rank_test.R",
+    "project_path" : "R/ssgsrt.gene_set_rank_test.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

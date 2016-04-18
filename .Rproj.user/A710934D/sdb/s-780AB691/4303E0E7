@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Perform a rank-based single sample gene set analysis.\n#'\n#' This function performs a rank-based single sample gene set analysis for\n#' a sample (\\code{x}) and a list of gene sets (\\code{geneset_list}).\n#'\n#' @param x a sample in a named array format.\n#' @param geneset_list a named list of gene sets, each of list element is named\n#'                     and a list ofgenes.\n#' @param alternative \\code{c('less','greater','two.sided')}.\n#'                    'less' ('greater') to check if the ranks of given gene set\n#'                    is higher (lower) than the rest.\n#' @param test.method \\code{c('ks.test', 'wilcox.test')}.  Defaults to 'ks'.\n#' @export\n#' @examples\n#' a_sample_gene_set_rank_test(x, a_geneset_list)\na_sample_gene_set_rank_test <- function(x, geneset_list, alternative = \"two.sided\", test.method = \"ks\") {\n  xr <- rank(x)\n  names(xr) <- names(x)\n\n  gsa_score <- vector(\"list\", length(geneset_list))\n\n  for (ii in 1:length(geneset_list)) {\n    c1 <- xr[geneset_list[[ii]]]\n    c2 <- setdiff(xr, c1)\n\n    test.methods <- c(\"ks.test\", \"wilcox.test\")\n    if (pmatch(test.method, test.methods) == 1) {\n      test.stat <- ks.test(c1, c2, alternative = alternative)\n    }\n    else {\n      test.stat <- wilcox.test(c2, c1, alternative = alternative)\n    }\n\n    # to prevent assigning Inf to z.stat\n    # if (test.stat$p.value == 1)\n    #   test.stat$p.value <- 1 - .Machine$double.eps\n    # if (test.stat$p.value == 0)\n    #   test.stat$p.value <- .Machine$double.eps\n\n    gsa_score[[ii]] <-\n      c(z.stat = qnorm(test.stat$p.value),\n        p.value = test.stat$p.value,\n        test.stat$statistic)\n  }\n\n  names(gsa_score) <- names(geneset_list)\n  gsa_score\n}\n",
+    "created" : 1461003496530.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "690431915",
+    "id" : "4303E0E7",
+    "lastKnownWriteTime" : 1461003507,
+    "last_content_update" : 1461003507027,
+    "path" : "~/Research/ssgsrt/R/ssgsrt.a_sample_gene_set_rank_test.R",
+    "project_path" : "R/ssgsrt.a_sample_gene_set_rank_test.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

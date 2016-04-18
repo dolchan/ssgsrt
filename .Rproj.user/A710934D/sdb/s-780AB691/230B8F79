@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Parse a line in 'gmt' format\n#'\n#' This function parses a line of string in 'gmt' format,\n#'   for example a line in a MSigDB file.\n#'\n#' @param aLine a string in 'gmt' format. There are assumed three main elements.\n#'        Each element is 'tab' delitmeted.  The first item is a name, the second\n#'        item is 'url' or something like that, and the last item is a list of genes,\n#'        separated by 'space'.\n#' @return a list of three elements: \\code{name}, \\code{url}, \\code{geneset}\n#' @keywords gmt parse\n#' @export\n#' @examples\n#' parse_a_line_in_gmt('a_name\\tan_url\\tgene1 gene2 gene3')\n#' @author Seungchan Kim (dolchan@gmail.com)\n#'\n\nparse_a_line_in_gmt <- function(aLine) {\n  aLine <- strsplit(as.character(aLine), \"\\\\s\")[[1]]\n\n  return(list(name = aLine[1], url = aLine[2], geneset = aLine[-c(1:2)]))\n}\n",
+    "created" : 1461001234537.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "322690762",
+    "id" : "230B8F79",
+    "lastKnownWriteTime" : 1461002274,
+    "last_content_update" : 1461002274480,
+    "path" : "~/Research/ssgsrt/R/ssgsrt.parse_a_line_in_gmt.R",
+    "project_path" : "R/ssgsrt.parse_a_line_in_gmt.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
