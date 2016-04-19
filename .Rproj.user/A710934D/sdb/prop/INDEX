@@ -1,3 +1,4 @@
+~%2FResearch%2Fssgsrt%2F.gitignore="D6D183A0"
 ~%2FResearch%2Fssgsrt%2FDESCRIPTION="382CBE7A"
 ~%2FResearch%2Fssgsrt%2FNAMESPACE="5ADD3331"
 ~%2FResearch%2Fssgsrt%2FR%2Fgene_set_rank_test.R="C35F7D15"
@@ -7,5 +8,6 @@
 ~%2FResearch%2Fssgsrt%2FR%2Fssgsrt.parse_a_line_in_gmt.R="56355DE7"
 ~%2FResearch%2Fssgsrt%2FR%2Fssgsrt.parse_gmt.R="FDE3BEB8"
 ~%2FResearch%2Fssgsrt%2FR%2Fssgsrt.read_MSigDB.R="477FDC03"
+~%2FResearch%2Fssgsrt%2Fman%2Fa_sample_gene_set_rank_test.Rd="6B2FD238"
 ~%2FResearch%2Fssgsrt%2Fman%2Fget_a_value.Rd="2E600C74"
 ~%2FResearch%2Fssgsrt%2Fman%2Fparse_a_line_in_gmt.Rd="6B21C259"

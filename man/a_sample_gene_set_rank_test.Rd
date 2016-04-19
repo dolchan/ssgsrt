@@ -14,10 +14,17 @@ a_sample_gene_set_rank_test(x, geneset_list, alternative = "two.sided",
 and a list ofgenes.}
 
 \item{alternative}{\code{c('less','greater','two.sided')}.
-'less' ('greater') to check if the ranks of given gene set
-is higher (lower) than the rest.}
+If 'less'/'greater', test if the overall gene expression of given gene set
+is lower/higher than the rest.  If 'two.sided', test either lower or higher.
+Defaults to 'two.sided'.}
 
 \item{test.method}{\code{c('ks.test', 'wilcox.test')}.  Defaults to 'ks'.}
+}
+\value{
+a list of z.stat, p.value, and D (ks.test) or W (wilcox.test) stat for each gene set.
+        z.stat indicates if the gene set expression is "lower" (negative) or "higher" (positive).
+        We use p-value estimated from the actual statistical test (ks.test or wilcox.test) and
+        use normal distribution to compute "pseudo" z statistics.
 }
 \description{
 This function performs a rank-based single sample gene set analysis for
