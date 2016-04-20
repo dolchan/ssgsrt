@@ -6,6 +6,7 @@
 #' @param x a sample in a named array format.
 #' @param geneset_list a named list of gene sets, each of list element is named
 #'                     and a list ofgenes.
+#' @param row.names a list of (gene) names of x. Useful when names(x) is NULL.
 #' @param alternative \code{c('less','greater','two.sided')}.
 #'                    If 'less'/'greater', test if the overall gene expression of given gene set
 #'                    is lower/higher than the rest.  If 'two.sided', test either lower or higher.
@@ -18,9 +19,18 @@
 #' @export
 #' @examples
 #' a_sample_gene_set_rank_test(x, a_geneset_list)
-a_sample_gene_set_rank_test <- function(x, geneset_list, alternative = 'two.sided', test.method = "ks") {
+a_sample_gene_set_rank_test <- function(x, geneset_list,
+                                        row.names = NULL,
+                                        alternative = 'two.sided', test.method = "ks") {
 
   gsa_score <- vector("list", length(geneset_list))
+
+  if (!is.null(row.names)) {
+    if (length(row.names) < length(x))
+      print("length(row.names) should be equal to length(x)")
+    else
+      names(x) <- row.names
+  }
 
   for (ii in 1:length(geneset_list)) {
     c1_idx <- match(geneset_list[[ii]], names(x))

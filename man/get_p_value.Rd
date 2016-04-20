@@ -4,7 +4,7 @@
 \alias{get_p_value}
 \title{Extract \code{'p.value'} element}
 \usage{
-get_p_value(gsa_list, adjuted = TRUE)
+get_p_value(gsa_list, adjusted = TRUE)
 }
 \description{
 Extract \code{'p.value'} element

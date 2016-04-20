@@ -4,14 +4,16 @@
 \alias{a_sample_gene_set_rank_test}
 \title{Perform a rank-based single sample gene set analysis.}
 \usage{
-a_sample_gene_set_rank_test(x, geneset_list, alternative = "two.sided",
-  test.method = "ks")
+a_sample_gene_set_rank_test(x, geneset_list, row.names = NULL,
+  alternative = "two.sided", test.method = "ks")
 }
 \arguments{
 \item{x}{a sample in a named array format.}
 
 \item{geneset_list}{a named list of gene sets, each of list element is named
 and a list ofgenes.}
+
+\item{row.names}{a list of (gene) names of x. Useful when names(x) is NULL.}
 
 \item{alternative}{\code{c('less','greater','two.sided')}.
 If 'less'/'greater', test if the overall gene expression of given gene set
