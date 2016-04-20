@@ -31,7 +31,7 @@ gene_set_rank_test <- function(data, geneset_list, row_names = NULL, alternative
     gsas_list
   } else {
     a_sample_gene_set_rank_test(data, geneset_list,
-                                row.names = row_names,
+                                row_names = row_names,
                                 alternative = alternative,
                                 test.method = test.method)
   }
