@@ -13,14 +13,15 @@
 #' @examples
 #' gene_set_rank_test(data, a_geneset_list)
 
-gene_set_rank_test <- function(data, geneset_list, alternative = "two.sided", test.method = "ks") {
+gene_set_rank_test <- function(data, geneset_list, row_names = NULL, alternative = "two.sided", test.method = "ks") {
   if (is.data.frame(data)) {
     n_samples <- ncol(data)
     gsas_list <- vector("list", length(n_samples))
+    row_names_x <- row.names(data)
     for (ii in 1:n_samples) {
       x <- data[, ii]
-      names(x) <- rownames(data)
       a_gsa <- a_sample_gene_set_rank_test(x, geneset_list,
+                                           row_names = row_names_x,
                                            alternative = alternative,
                                            test.method = test.method)
       gsas_list[[ii]] <- a_gsa
@@ -30,6 +31,7 @@ gene_set_rank_test <- function(data, geneset_list, alternative = "two.sided", te
     gsas_list
   } else {
     a_sample_gene_set_rank_test(data, geneset_list,
+                                row.names = row_names,
                                 alternative = alternative,
                                 test.method = test.method)
   }

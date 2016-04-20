@@ -4,8 +4,8 @@
 \alias{gene_set_rank_test}
 \title{Perform a rank-based single sample gene set analysis.}
 \usage{
-gene_set_rank_test(data, geneset_list, alternative = "two.sided",
-  test.method = "ks")
+gene_set_rank_test(data, geneset_list, row_names = NULL,
+  alternative = "two.sided", test.method = "ks")
 }
 \arguments{
 \item{data}{Either a set of samples in \code{data.frame} format
