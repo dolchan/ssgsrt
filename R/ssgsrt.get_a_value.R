@@ -32,8 +32,11 @@ get_z_stat <- function(gsa_list) {
 #' Extract \code{'p.value'} element
 #' @export
 
-get_p_value <- function(gsa_list) {
-  get_a_value(gsa_list, 'p.value')
+get_p_value <- function(gsa_list, adjusted = TRUE) {
+  if (adjusted)
+    get_a_value(gsa_list, 'adj.p.value')
+  else
+    get_a_value(gsa_list, 'p.value')
 }
 
 #' Extract \code{'D'} element

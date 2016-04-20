@@ -11,7 +11,7 @@
 #'                    is lower/higher than the rest.  If 'two.sided', test either lower or higher.
 #'                    Defaults to 'two.sided'.
 #' @param test.method \code{c('ks.test', 'wilcox.test')}.  Defaults to 'ks'.
-#' @return a list of z.stat, p.value, and D (ks.test) or W (wilcox.test) stat for each gene set.
+#' @return a list of z.stat, D (ks.test) or W (wilcox.test) stat, p.value, and adj.p.value (FDR) for each gene set.
 #'         z.stat indicates if the gene set expression is "lower" (negative) or "higher" (positive).
 #'         We use p-value estimated from the actual statistical test (ks.test or wilcox.test) and
 #'         use normal distribution to compute "pseudo" z statistics.
@@ -24,6 +24,7 @@ a_sample_gene_set_rank_test <- function(x, geneset_list, alternative = 'two.side
 
   for (ii in 1:length(geneset_list)) {
     c1_idx <- match(geneset_list[[ii]], names(x))
+    c1_idx <- c1_idx[!is.na(c1_idx)]
     c1 <- x[c1_idx]
     c2 <- x[-c1_idx]
 
@@ -63,7 +64,7 @@ a_sample_gene_set_rank_test <- function(x, geneset_list, alternative = 'two.side
       }
       else {
         if (alternative.choice == 3) {
-          z.stat <- -qnorm(test.stat$p.value) * sign(mean(c1)-mean(c2))
+          z.stat <- qnorm(1-test.stat$p.value) * sign(mean(c1)-mean(c2))
         }
         else {
           stop(sprintf('alternative should be one of "less", "greater", or "two.sided"'))
@@ -73,8 +74,16 @@ a_sample_gene_set_rank_test <- function(x, geneset_list, alternative = 'two.side
 
     gsa_score[[ii]] <-
       c(z.stat = z.stat,
-        p.value = test.stat$p.value,
-        test.stat$statistic)
+        test.stat$statistic,
+        p.value = test.stat$p.value)
+  }
+
+  # p-value correction for multiple testing across gene sets
+  pvals <- get_p_value(list(gsa_score), adjusted = FALSE)
+  pvals.adj <- p.adjust(pvals, method="BH")
+
+  for (ii in 1:length(gsa_score)) {
+    gsa_score[[ii]] <- c(gsa_score[[ii]], adj.p.value = pvals.adj[ii])
   }
 
   names(gsa_score) <- names(geneset_list)

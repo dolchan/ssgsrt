@@ -21,7 +21,7 @@ Defaults to 'two.sided'.}
 \item{test.method}{\code{c('ks.test', 'wilcox.test')}.  Defaults to 'ks'.}
 }
 \value{
-a list of z.stat, p.value, and D (ks.test) or W (wilcox.test) stat for each gene set.
+a list of z.stat, D (ks.test) or W (wilcox.test) stat, p.value, and adj.p.value (FDR) for each gene set.
         z.stat indicates if the gene set expression is "lower" (negative) or "higher" (positive).
         We use p-value estimated from the actual statistical test (ks.test or wilcox.test) and
         use normal distribution to compute "pseudo" z statistics.
